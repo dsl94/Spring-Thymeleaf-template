@@ -7,4 +7,5 @@ import com.intisa.intisia.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	User findByUsernameIgnoreCase(String username);
 }

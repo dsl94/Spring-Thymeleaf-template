@@ -1,10 +1,13 @@
 package com.intisa.intisia.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -55,5 +58,15 @@ public class User extends AuditModel implements Serializable {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Company company;
+
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+		name = "user_authority",
+		joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+		inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
+	@BatchSize(size = 20)
+	private Set<Authority> authorities = new HashSet<>();
+
 
 }
