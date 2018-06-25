@@ -10,19 +10,6 @@
 
 		<div th:replace="fragments/navigation :: navigation"></div>
 
-		<div class="container" id="mainContent">
-
-			<div class="row">
-				<div class="col-md-8">
-					<div layout:fragment="content"></div>
-				</div>
-
-				<div class="col-md-4">
-					<div th:replace="fragments/sidebar :: sidebar"></div>
-				</div>
-			</div>
-		</div>
-
 		<div th:replace="fragments/footer :: footer"></div>
 
 	</body>
